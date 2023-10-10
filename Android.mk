@@ -12,8 +12,13 @@ LOCAL_SHARED_LIBRARIES := \
     libdl \
     libbase \
     libutils \
-    android.hardware.power-V1-ndk \
     libbinder_ndk
+
+ifeq ($(call math_gt_or_eq, $(PLATFORM_SDK_VERSION), 34), true)
+LOCAL_SHARED_LIBRARIES += android.hardware.power-V1-ndk
+else
+LOCAL_SHARED_LIBRARIES += android.hardware.power-V1-ndk_platform
+endif
 
 LOCAL_HEADER_LIBRARIES := \
     libhardware_headers
